@@ -1,7 +1,8 @@
 import ballerina/log;
-import ballerina/time;
+import ballerina/http;
 
 public function main() returns error? {
-    time:Utc now = time:utcNow();
-    log:printInfo("Scheduled task ran", timestamp = time:utcToString(now));
+    http:Client api = check new ("https://official-joke-api.appspot.com");
+    json joke = check api->/random_joke;
+    log:printInfo("Fetched a joke", data = joke);
 }
