@@ -1,0 +1,9 @@
+[package]
+org = "wso2qaaed"
+name = "minute_logger"
+version = "0.1.0"
+distribution = "2201.13.4"
+title = "minute_logger"
+
+[build-options]
+sticky = true
