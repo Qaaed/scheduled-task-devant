@@ -7,7 +7,7 @@ const PORT = 3000;
 
 app.use(cors());
 
-app.get("/joke", async (req, res) => {
+app.get("/", async (req, res) => {
   try {
     const response = await fetch("https://v2.jokeapi.dev/joke/Any?safe-mode");
     const joke = await response.json();
