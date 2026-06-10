@@ -21,7 +21,6 @@ async function logJoke() {
     const joke = await fetchJoke();
 
     console.log(`Joke at ${getTimestamp()}`);
-    console.log("");
 
     if (joke.type === "single") {
       console.log("", joke.joke);
