@@ -19,6 +19,9 @@ app.get("/", async (req, res) => {
       res.json({ type: "twopart", setup: joke.setup, delivery: joke.delivery });
     }
   } catch (err) {
+    // This line prints the full error stack to your logs
+    console.error("Error fetching joke from external API:", err);
+    
     res.status(500).json({ error: "Failed to fetch joke" });
   }
 });
