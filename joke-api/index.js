@@ -9,8 +9,8 @@ app.use(cors());
 
 app.get("/", async (req, res) => {
   try {
-    //const response = await fetch("https://v2.jokeapi.dev/joke/Any?safe-mode");
-    const response = await fetch("https://v2.jokeapi.dev/invalid-endpoint-break");
+    const response = await fetch("https://v2.jokeapi.dev/joke/Any?safe-mode");
+    //const response = await fetch("https://v2.jokeapi.dev/invalid-endpoint-break");
     const joke = await response.json();
 
     if (joke.type === "single") {
