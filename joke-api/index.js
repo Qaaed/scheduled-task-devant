@@ -33,7 +33,9 @@ app.get("/health", (req, res) => {
 // Memory leak simulator: each call allocates +10MB that is never freed
 const memoryHog = [];
 app.get("/leak", (req, res) => {
-  memoryHog.push(Buffer.alloc(10 * 1024 * 1024)); // +10MB per call
+  const buf = Buffer.allocUnsafe(10 * 1024 * 1024); // +10MB per call
+  buf.fill(1); // <-- touch every byte so it's actually resident in RAM
+  memoryHog.push(buf);
   res.json({ chunks: memoryHog.length, allocatedMB: memoryHog.length * 10 });
 });
 
