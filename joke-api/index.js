@@ -21,13 +21,20 @@ app.get("/", async (req, res) => {
   } catch (err) {
     // This line prints the full error stack to your logs
     console.error("Error fetching joke from external API:", err);
-    
+
     res.status(500).json({ error: "Failed to fetch joke" });
   }
 });
 
 app.get("/health", (req, res) => {
   res.json({ status: "ok" });
+});
+
+// Memory leak simulator: each call allocates +10MB that is never freed
+const memoryHog = [];
+app.get("/leak", (req, res) => {
+  memoryHog.push(Buffer.alloc(10 * 1024 * 1024)); // +10MB per call
+  res.json({ chunks: memoryHog.length, allocatedMB: memoryHog.length * 10 });
 });
 
 app.listen(PORT, () => {
